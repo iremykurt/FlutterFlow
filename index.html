@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Yatay Bar Grafiği</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+  <body>
+    <div id="myDiv" style="width: 100%; height: 100%"></div>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      let totalMultiplier = parseFloat(urlParams.get("totalMultiplier")) || 0;
+      let totalIndexSum = parseFloat(urlParams.get("totalIndexSum")) || 0;
+
+      let data = [
+        {
+          type: "bar",
+          x: [totalMultiplier, totalIndexSum],
+          y: ["Toplam Endeks", "Toplam"],
+          orientation: "h",
+          marker: {
+            color: ["#add8e6", "#b3cde3"],
+            line: {
+              width: 2,
+              color: "#cfd8dc",
+            },
+          },
+        },
+      ];
+
+      let layout = {
+        xaxis: {
+          range: [0, Math.max(totalMultiplier, totalIndexSum) * 1.2],
+        },
+        yaxis: {
+          automargin: true,
+        },
+        margin: { l: 100, r: 30, t: 50, b: 50 },
+      };
+
+      Plotly.newPlot("myDiv", data, layout);
+    </script>
+  </body>
+</html>
